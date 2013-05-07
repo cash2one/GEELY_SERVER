@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 指定Web应用的默认编码集；对于获取中文请求参数值，应该将访属性值设为GBK或GB2312 -->
+	<!-- <constant name="struts.i18n.encoding" value="GBK"/> -->
+
+	<!-- 指定Struts2默认的ObjectFactory Bean，该属性默认值是spring -->
+	<!-- <constant name="struts.objectFactory" value="spring" /> -->
+
+	<!-- 指定Struts2应用所需要的国际化资源文件，多个资源文件的文件名以英文逗号隔开 -->
+	<!-- <constant name="struts.custom.i18n.resources" value="resources.ApplicationResources"/> -->
+
+	<!-- 设置当struts.xml文件改变后，系统是否自动重新加载该文件；该属性的默认值为false。 -->
+	<!-- <constant name="struts.configuration.xml.reload" value="true"/> -->
+
+	<!-- 设置Struts2应用是否使用开发模式，默认值为false。 -->
+	<!--constant name="struts.devMode" value="false" /-->
+
+	<!-- 设置是否每次HTTP请求到达时，系统都重新加载资源文件，默认值为false。 -->
+	<!-- <constant name="struts.i18n.reload" value="true" /> -->
+
+	<!-- 指定需要Struts2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求都由Struts2处理。
+		如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号隔开 -->
+	<!-- <constant name="struts.action.extension" value="action,do" /> -->
+
+	<include file="struts-default.xml" />
+	<include file="conf/action/struts-common.xml" />
+	<!-- <include file="conf/action/struts-basedata.xml" />
+	<include file="conf/action/struts-login.xml" />
+	<include file="conf/action/struts-main.xml" />
+	<include file="conf/action/struts-sys.xml" /> -->
+	<include file="conf/action/struts-client.xml" />
+	<!-- <include file="conf/action/struts-si.xml" /> -->
+</struts>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <!-- Struts 2使用包package来管理Action和拦截器等 -->
+    <!-- Struts 2的配置文件是从上到下处理的，所以父包应该在子包前面定义 -->
+    
+    <!-- 定义名为default的包，继承Struts 2缺省包struts-default -->
+    <package name="default" extends="struts-default">
+        <!-- 定义拦截器 -->
+        <interceptors>
+            <!-- 定义系统有效性检查拦截器 --> 
+            <interceptor name="systemValidityCheck" class="systemValidityCheckInterceptor"/>
+            <!-- 定义会话状态检查拦截器 -->
+            <interceptor name="sessionCheck" class="sessionCheckInterceptor"/>
+            <interceptor name="sessionCheck2" class="sessionCheckInterceptor2"/>
+            <!-- 定义功能权限检查拦截器 -->
+            <interceptor name="privilegeCheck" class="privilegeCheckInterceptor"/>
+            <!-- 定义系统日志跟踪拦截器 -->
+            <interceptor name="sysLogTrack" class="sysLogTrackInterceptor"/>
+            <!-- 定义进行异常处理拦截器 -->
+            <interceptor name="exceptionHanding" class="exceptionHandingInterceptor"/>
+            <!-- 定义静态页面生成器 -->
+            <interceptor name="staticHandle" class="staticPageInterceptor"/>
+            
+            
+            <!-- 定义缺省的拦截器栈 -->
+            <interceptor-stack name="defaultInterceptorStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="staticHandle"/>
+                <!--  <interceptor-ref name="sessionCheck"/>-->
+                <!-- <interceptor-ref name="exceptionHanding"/> -->
+                <!-- <interceptor-ref name="systemValidityCheck"/> -->
+            </interceptor-stack>
+            
+            <!-- 定义用于进行用户操作合法性检查的拦截器栈（包含会话状态检查和功能权限检查等） -->
+            <interceptor-stack name="userValidityCheck">
+                <interceptor-ref name="defaultInterceptorStack"/>
+                <interceptor-ref name="sessionCheck"/>
+                <interceptor-ref name="privilegeCheck"/>
+            </interceptor-stack>
+            
+            <!-- 定义用于进行用户操作合法性检查和系统日志跟踪的拦截器栈 -->
+            <interceptor-stack name="validityCheckAndLogTrack">
+                <interceptor-ref name="userValidityCheck"/>
+                <interceptor-ref name="sysLogTrack"/>
+                <!-- <interceptor-ref name="exceptionHanding"/> -->
+            </interceptor-stack>
+        </interceptors>
+        
+        <!-- 配置默认的拦截器(所有此包及子包中的Action自动调用的拦截器堆栈) -->
+        <default-interceptor-ref name="defaultInterceptorStack" /> 
+                
+        <!-- 配置默认Action，用于处理无效的URL -->
+        <default-action-ref name="siteModuleIsNotExist"/>
+        
+        <!-- 此处定义所有的全局结果 -->
+        <global-results>
+            <result name="Building">/WEB-INF/web/global/building.jsp</result>
+            <result name="default">/default.jsp</result>
+            <result name="login">/login.jsp</result>
+            <result name="Nologin">/WEB-INF/common/nologin.jsp</result>
+            <result name="exception">/WEB-INF/common/exception.jsp</result>
+            <result name="sessionTimeOut">/WEB-INF/common/sessionTimeOut.jsp</result>
+            <result name="privilegeNoEnough">/WEB-INF/common/privilegeNoEnough.jsp</result>
+            <result name="setup" type="redirectAction">
+                <param name="actionName">systemSetup_init</param>
+                <param name="namespace"></param> 
+                <param name="redirectSign">1</param>
+                <param name="message">${message}</param>
+                <param name="initSign">1</param>
+            </result>
+            <result name="register" type="redirectAction">
+                <param name="actionName">systemRegister_init</param>
+                <param name="namespace"></param> 
+                <param name="redirectSign">1</param>
+                <param name="message">${message}</param>
+            </result>
+        </global-results>
+        
+        <!-- 此处定义所有的全局异常映射 -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+        
+        <!-- 通过action元素配置一个默认所引用的Action -->
+        <action name="moduleIsNotExist">
+            <result>/WEB-INF/common/moduleIsNotExist.jsp</result>
+        </action>
+        <action name="siteModuleIsNotExist">
+            <result>/WEB-INF/site/common/moduleIsNotExist.jsp</result>
+        </action>
+    </package>
+    
+    <!-- 定义名为manageBase的包，继承default -->
+    <package name="manageBase" extends="default">
+        <!-- 配置默认的拦截器(所有此包及子包中的Action自动调用的拦截器堆栈) -->
+        <default-interceptor-ref name="validityCheckAndLogTrack" /> 
+    </package> 
+    
+    <!-- 定义名为clientBase的包，继承json-default -->
+    <package name="clientBase" extends="json-default">
+    	<!-- <interceptors>
+    	  	定义系统日志跟踪拦截器
+            <interceptor name="sysLogTrack" class="sysLogTrackInterceptor"/>
+            定义进行异常处理拦截器
+            <interceptor name="exceptionHanding" class="exceptionHandingInterceptor"/>
+    	    <interceptor-stack name="clientDefaultInterceptorStack">
+              <interceptor-ref name="defaultStack"/>
+              <interceptor-ref name="exceptionHanding"/>
+              <interceptor-ref name="sysLogTrack"/>
+            </interceptor-stack>
+    	</interceptors>
+    	
+        配置默认的拦截器(所有此包及子包中的Action自动调用的拦截器堆栈)
+        <default-interceptor-ref name="clientDefaultInterceptorStack" /> -->
+        
+        <global-results>	
+     	    <result name="clientException" type="chain">
+				<param name="actionName">clientAction</param>
+				<param name="method">handleException</param>
+			</result>
+			<!-- <result name="clientException">
+				WEB-INF/common/clientException.jsp
+			</result> -->
+        	<result type="json">
+	    		<param name="root">returnMap</param>
+	    	</result>
+	    	<result type="json" name="list">
+	    		<param name="root">returnList</param>
+	    	</result>
+	    </global-results>
+	    
+	    <!-- 此处定义所有的全局异常映射 -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="clientException"/>
+        </global-exception-mappings>
+        
+        <action name="clientAction" class="clientAction">
+        </action>
+    </package>
+            
+</struts>

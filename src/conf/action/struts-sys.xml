@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- （系统管理模块）Struts2配置文件 -->
+
+<struts>
+    <!-- 系统管理 -->
+    <package name="manageSys" extends="manageBase">
+    	<!-- 单位管理 -->
+        <action name="org_*" class="com.fsc.xxt.sys.org.action.OrgAction" method="{1}">
+        	<result name="frame">/WEB-INF/sys/org/orgFrame.jsp</result>
+        	<result name="tree">/WEB-INF/sys/org/orgTree.jsp</result>
+        	<result name="list">/WEB-INF/sys/org/orgList.jsp</result>
+        	<result name="input">/WEB-INF/sys/org/orgForm.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">org_list</param>
+        		<param name="porgNo">${porgNo}</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+        
+        <!-- 部门信息管理 -->
+        <action name="dept_*" class="com.fsc.xxt.sys.dept.action.DeptAction" method="{1}">
+        	<result name="frame">/WEB-INF/sys/dept/deptFrame.jsp</result>
+        	<result name="tree">/WEB-INF/sys/dept/deptTree.jsp</result>
+        	<result name="list">/WEB-INF/sys/dept/deptList.jsp</result>
+        	<result name="input">/WEB-INF/sys/dept/deptForm.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">dept_list</param>
+        		<param name="orgNo">${orgNo}</param>
+        		<param name="pdeptNo">${pdeptNo}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+        
+        <!-- 用户管理 -->
+        <action name="editPass" class="userAction" method="editPass">
+        	<result name="success">/WEB-INF/sys/user/editPassword.jsp</result>
+        </action>
+        <action name="savePass" class="userAction" method="savePass">
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">editPass</param>
+                <param name="message">${message}</param>
+        	</result>
+        </action>
+        <action name="user_*" class="com.fsc.xxt.sys.user.action.UserAction" method="{1}">
+        	<result name="frame">/WEB-INF/sys/user/userFrame.jsp</result>
+        	<result name="tree">/WEB-INF/sys/user/userTree.jsp</result>
+        	<result name="list">/WEB-INF/sys/user/userList.jsp</result>
+        	<result name="input">/WEB-INF/sys/user/userForm.jsp</result>
+        	<result name="deptList">/WEB-INF/sys/user/deptList.jsp</result>
+        	<result name="roleSet">/WEB-INF/sys/user/roleSet.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">user_list</param>
+        		<param name="orgNo">${orgNo}</param>
+        		<param name="deptNo">${deptNo}</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+                <param name="message">${message}</param>
+        	</result>
+        	<result name="queryRight">/WEB-INF/sys/user/rightSet.jsp</result>
+        	
+        </action>
+        
+        <!-- 系统角色管理 -->
+        <action name="role_*" class="com.fsc.xxt.sys.role.action.RoleAction" method="{1}">
+        	<result name="list">/WEB-INF/sys/role/roleList.jsp</result>
+        	<result name="input">/WEB-INF/sys/role/roleForm.jsp</result>
+        	<result name="privSet">/WEB-INF/sys/role/privSet.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">role_list</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+                <param name="message">${message}</param>
+        	</result>
+        </action>
+        
+        <!-- 系统功能权限管理 -->
+        <action name="privilege_*" class="com.fsc.xxt.sys.privilege.action.PrivilegeAction" method="{1}">
+        	<result name="frame">/WEB-INF/sys/privilege/privilegeFrame.jsp</result>
+        	<result name="tree">/WEB-INF/sys/privilege/privilegeTree.jsp</result>
+        	<result name="list">/WEB-INF/sys/privilege/privilegeList.jsp</result>
+        	<result name="input">/WEB-INF/sys/privilege/privilegeForm.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">privilege_list</param>
+        		<param name="moduleId">${moduleId}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+        
+        <!-- 数据字典管理 -->
+        <action name="dictionary_*" class="com.fsc.xxt.sys.dic.action.DictionaryAction" method="{1}">
+            <result name="frame">/WEB-INF/sys/dictionary/dicFrame.jsp</result>
+            <result name="tree">/WEB-INF/sys/dictionary/dicTree.jsp</result>
+            <result name="list">/WEB-INF/sys/dictionary/dicList.jsp</result>
+            <result name="input">/WEB-INF/sys/dictionary/dicForm.jsp</result>
+            <result name="success" type="redirect-action">
+                <param name="actionName">dictionary_list</param>
+                <param name="redirectSign">1</param>
+                <param name="pageNo">${pageNo}</param>
+                <param name="superDicId">${superDicId}</param>
+            </result>
+        </action>
+        
+        
+        <!-- 系统日志管理 -->
+        <action name="sysLog_*" class="com.fsc.xxt.sys.log.action.SysLogAction" method="{1}">
+        	<result name="list">/WEB-INF/sys/log/logList.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">sysLog_list</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+        
+        <!-- 系统异常日志管理 -->
+        <action name="exceptionLog_*" class="com.fsc.xxt.sys.log.action.ExceptionLogAction" method="{1}">
+        	<result name="list">/WEB-INF/sys/log/exceptionLogList.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">exceptionLog_list</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+        
+         <!-- 数据日志管理 -->
+        <action name="dataLog_*" class="com.fsc.xxt.sys.log.action.DataLogAction" method="{1}">
+        	<result name="list">/WEB-INF/sys/log/dataLogList.jsp</result>
+        	<result name="view">/WEB-INF/sys/log/dataLogView.jsp</result>
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">dataLog_list</param>
+        		<param name="pageNo">${pageNo}</param>
+                <param name="redirectSign">1</param>
+        	</result>
+        </action>
+   </package>
+   
+   <package name="module" extends="default">
+    	<!-- 菜单模块管理 -->
+        <action name="module" class="moduleAction" method="userSmodule">
+        	<result name="success">/WEB-INF/sys/module/module.jsp</result>
+        </action>
+        
+        <!-- 菜单模块管理 -->
+        <action name="shortCutModule" class="moduleAction" method="shortCutModule">
+        	<result name="success">/WEB-INF/sys/module/module.jsp</result>
+        </action>
+        
+        <!-- 快捷菜单信息管理 -->
+        <action name="shortCut_*" class="com.fsc.xxt.sys.shortcut.action.ShortCutAction" method="{1}">
+        </action>
+    </package>
+    
+    <!-- json验证 -->
+    <package name="sysJson" extends="json-default">
+	    
+        <!--登录账号验证  -->
+		<action name="validateLoginName" class="com.fsc.xxt.sys.user.action.UserAction" method="validateLoginName">
+			<result type="json">
+			<param name="root">flag</param>
+			</result>
+		</action>
+		
+    	<!-- 单位编号信息json验证 -->
+    	<action name="validOrgNo" class="com.fsc.xxt.sys.org.action.OrgAction" method="validOrgNo">
+			<result type="json">
+			<param name="root">message</param>
+			</result>
+		</action>
+		
+		<!-- 根据所选单位加载该单位下的部门列表 -->
+	    <action name="loadDept" class="com.fsc.xxt.sys.dept.action.DeptAction" method="loadDeptList">
+	    	<result type="json">
+	    		<param name="root">deptList</param>
+	    	</result>
+	    </action>
+		
+		<!-- 根据所选部门加载该部门下的用户列表 -->
+	    <action name="loadUser" class="com.fsc.xxt.sys.user.action.UserAction" method="loadUserList">
+	    	<result type="json">
+	    		<param name="root">userList</param>
+	    	</result>
+	    </action>
+    </package>  
+ 
+</struts>

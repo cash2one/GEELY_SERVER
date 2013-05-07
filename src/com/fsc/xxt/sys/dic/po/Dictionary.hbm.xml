@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+    数据字典信息表映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.dic.po.Dictionary" table="T_SYS_DICTIONARY">
+        <id name="dicId" type="java.lang.String">
+            <column name="ID" length="32" />
+        </id>
+        <property name="dicType" type="java.lang.String">
+            <column name="DIC_TYPE" length="6" not-null="true" />
+        </property>
+        <property name="dicCode" type="java.lang.String">
+            <column name="DIC_CODE" length="16" not-null="true" />
+        </property>
+        <property name="dicName" type="java.lang.String">
+            <column name="DIC_NAME" length="96" />
+        </property>
+        <property name="dicRemark" type="java.lang.String">
+            <column name="DIC_REMARK" length="512" />
+        </property>
+        <property name="dicCodeLen" type="java.lang.Integer">
+            <column name="CODE_LEN" precision="2" scale="0" />
+        </property>
+        <property name="dicCodeType" type="java.lang.Integer">
+            <column name="CODE_TYPE" precision="1" scale="0" />
+        </property>
+        <property name="sign" type="java.lang.Integer">
+            <column name="SIGN" precision="1" scale="0" />
+        </property>
+         <property name="dicSortNo" type="java.lang.Integer">
+            <column name="SORT_NO" precision="2" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- （系统管理模块）配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 单位数据管理组件 -->
+    <bean id="orgDao" class="com.fsc.xxt.sys.org.dao.impl.OrgDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 单位管理逻辑组件 -->
+	<bean id="orgService" class="com.fsc.xxt.sys.org.service.impl.OrgServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="orgDao" ref="orgDao"/>
+	</bean>	
+	
+	<!-- 部门信息数据管理组件 -->
+    <bean id="deptDao" class="com.fsc.xxt.sys.dept.dao.impl.DeptDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 部门信息管理逻辑组件 -->
+	<bean id="deptService" class="com.fsc.xxt.sys.dept.service.impl.DeptServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="deptDao" ref="deptDao"/>
+		<property name="orgDao" ref="orgDao"/>
+	</bean>
+	
+	<!-- 用户信息数据管理组件 -->
+    <bean id="userDao" class="com.fsc.xxt.sys.user.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 用户信息管理逻辑组件 -->
+	<bean id="userService" class="com.fsc.xxt.sys.user.service.impl.UserServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	
+	<!-- 用户信息管理 -->
+    <bean id="userAction" class="com.fsc.xxt.sys.user.action.UserAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<!-- 菜单模块信息数据管理组件 -->
+    <bean id="moduleDao" class="com.fsc.xxt.sys.module.dao.impl.ModuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 菜单模块信息管理逻辑组件 -->
+	<bean id="moduleService" class="com.fsc.xxt.sys.module.service.impl.ModuleServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="moduleDao" ref="moduleDao"/>
+	</bean>
+	
+	<!-- 菜单模块信息管理 -->
+    <bean id="moduleAction" class="com.fsc.xxt.sys.module.action.ModuleAction">
+		<property name="moduleService" ref="moduleService"/>
+		<property name="shortCutService" ref="shortCutService"/>
+	</bean>
+	
+	<!-- 系统功能权限信息数据管理组件 -->
+    <bean id="privilegeDao" class="com.fsc.xxt.sys.privilege.dao.impl.PrivilegeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 系统功能权限信息管理逻辑组件 -->
+	<bean id="privilegeService" class="com.fsc.xxt.sys.privilege.service.impl.PrivilegeServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="privilegeDao" ref="privilegeDao"/>
+	</bean>
+	
+	
+	<!-- 数据字典数据管理组件 -->
+    <bean id="dictionaryDao" class="com.fsc.xxt.sys.dic.dao.impl.DictionaryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 数据字典管理逻辑组件 -->
+	<bean id="dictionaryService" class="com.fsc.xxt.sys.dic.service.impl.DictionaryServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="dictionaryDao" ref="dictionaryDao"/>
+	</bean>	
+	
+	<!-- 系统角色数据管理组件 -->
+    <bean id="roleDao" class="com.fsc.xxt.sys.role.dao.impl.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 系统角色管理逻辑组件 -->
+	<bean id="roleService" class="com.fsc.xxt.sys.role.service.impl.RoleServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="roleDao" ref="roleDao"/>
+	</bean>	
+	
+	<!-- 系统日志数据管理组件 -->
+    <bean id="sysLogDao" class="com.fsc.xxt.sys.log.dao.impl.SysLogDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 系统日志管理逻辑组件 -->
+	<bean id="sysLogService" class="com.fsc.xxt.sys.log.service.impl.SysLogServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="sysLogDao" ref="sysLogDao"/>
+	</bean>
+
+	<!-- 异常日志信息 -->
+	<bean id="exceptionlogService" class="com.fsc.xxt.sys.log.service.impl.ExceptionLogServiceImpl">
+	<property name="baseDao" ref="baseDao"></property>
+	</bean>
+	
+	<!-- 数据日志信息 -->
+	<bean id="datalogService" class="com.fsc.xxt.sys.log.service.impl.DataLogServiceImpl" autowire="byName">
+	</bean>
+	
+	<!-- 快捷菜单信息数据管理组件 -->
+    <bean id="shortCutDao" class="com.fsc.xxt.sys.shortcut.dao.impl.ShortCutDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!-- 快捷菜单信息管理逻辑组件 -->
+	<bean id="shortCutService" class="com.fsc.xxt.sys.shortcut.service.impl.ShortCutServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+		<property name="shortCutDao" ref="shortCutDao"/>
+	</bean>
+	
+</beans>

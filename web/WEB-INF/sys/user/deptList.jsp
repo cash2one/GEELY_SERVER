@@ -1,0 +1,1 @@
+<%@ taglib prefix="s" uri="/struts-tags" %><%@ page contentType="text/html;charset=UTF-8"%><s:select id="t_deptNo" name="deptNo" list="deptList" listKey="deptNo" listValue="name" cssStyle="width:200px;" headerKey="" headerValue="--请选择所在部门--" onchange="getPostionList(this.value)"></s:select>

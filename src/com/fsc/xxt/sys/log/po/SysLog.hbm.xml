@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	系统日志POJO类与系统日志信息表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.log.po.SysLog" table="T_SYS_LOG">
+        <id name="logId" type="string">
+            <column name="LOGID" length="32"/>
+        </id>
+        <property name="userId" type="string">
+            <column name="USERID" length="32" />
+        </property>
+        <property name="ipAddress" type="string">
+            <column name="IPADDRESS" length="32" />
+        </property>
+        <property name="macAddress" type="string">
+            <column name="MACADDRESS" length="32" />
+        </property>
+        <property name="logContent" type="string">
+            <column name="LOGCONTENT" length="512" />
+        </property>
+        <property name="logTime" type="string">
+            <column name="LOGTIME" length="32" />
+        </property>
+        <many-to-one name="user" column="USERID" update="false" not-found="ignore"
+			insert="false" class="com.fsc.xxt.sys.user.po.User" />
+    </class>
+</hibernate-mapping>

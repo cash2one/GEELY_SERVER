@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- （SI后台管理）Struts2配置文件 -->
+
+<struts>
+    <!-- SI后台管理 -->
+    <package name="si" extends="manageBase">
+        <!-- 产品推荐管理 -->
+        <action name="product_*" class="com.fsc.xxt.si.product.action.ProductAction" method="{1}">
+        	<result name="list">/WEB-INF/si/product/productList.jsp</result>
+        	<result name="seacher">/WEB-INF/si/product/productList.jsp</result>
+        	<result name="newproduct">/WEB-INF/si/product/newproductform.jsp</result>
+        	<result name="saveproduct" type="redirectAction">product_seacher</result>
+        	<result name="editproduct">/WEB-INF/si/product/ediproductform.jsp</result>
+        	<result name="delproduct" type="redirectAction">product_seacher</result>
+        </action>
+        
+        <!-- 公告管理 -->
+        <action name="bulletin_*" class="com.fsc.xxt.si.bulletin.action.BulletinAction" method="{1}">
+        	<result name="bullentilist">/WEB-INF/si/bulletin/bulletinList.jsp</result>
+        	<result name="newbulletin">/WEB-INF/si/bulletin/newbulletinform.jsp</result>
+        	<result name="savebulletin" type="redirectAction">bulletin_getbulletinlist.do</result>
+        	<result name="edibulletin">/WEB-INF/si/bulletin/edibulletinform.jsp</result>
+        	<result name="delbulletin" type="redirectAction">bulletin_getbulletinlist.do</result>
+        </action>
+        
+        <!-- 互动信息查询 -->
+        <action name="msg_*" class="com.fsc.xxt.si.msg.action.MsgAction" method="{1}">
+			  <result name="msglist">/WEB-INF/si/msg/msgList.jsp</result>      	
+        </action>
+        
+        <!-- 班级信息查询 -->
+        <action name="classmsg_*" class="com.fsc.xxt.si.msg.action.ClassMsgAction" method="{1}">
+        	<result name="classmsglist">/WEB-INF/si/msg/classmsgList.jsp</result>
+        </action>
+        
+        <!-- 意见反馈 -->
+        <action name="questions_*" class="com.fsc.xxt.si.questions.action.QuestionsAction" method="{1}">
+        	<result name="questionslist">/WEB-INF/si/questions/questionsList.jsp</result>
+        	<result name="setmyflag" type="redirectAction">questions_getquestionslist.do</result>
+        </action>
+        
+        <!-- 学生管理 -->
+        <action name="student_*" class="com.fsc.xxt.si.student.action.StudentAction" method="{1}">
+        	<result name="studentlist">/WEB-INF/si/student/studentList.jsp</result>
+        	<result name="addstudent">/WEB-INF/si/student/addstudent.jsp</result>
+        	<result name="savestudent" type="redirectAction">student_getStudentlist.do</result>
+        	<result name="edistudent">/WEB-INF/si/student/edistudent.jsp</result>
+        	<result name="delstudent" type="redirectAction">student_getStudentlist.do</result>
+        </action>
+        
+        <!-- 教师管理 -->
+		<action name="teacher_*" class="com.fsc.xxt.si.teacher.action.TeacherAction" method="{1}">
+			<result name="teacherlist">/WEB-INF/si/teacher/teacherList.jsp</result>
+			<result name="addteacher">/WEB-INF/si/teacher/addteacher.jsp</result>
+			<result name="saveteacher" type="redirectAction">teacher_getteacherlist.do</result>
+			<result name="editeacher">/WEB-INF/si/teacher/editeacher.jsp</result>
+			<result name="delteacher" type="redirectAction">teacher_getteacherlist.do</result>
+			<result name="teachercourse">/WEB-INF/si/teacher/teachercourseList.jsp</result>
+		</action>
+		
+		<!-- 学校管理 -->
+		<action name="school_*" class="com.fsc.xxt.si.school.action.SchoolAction" method="{1}">
+			<result name="schoollist">/WEB-INF/si/school/schoolList.jsp</result>
+			<result name="addschool">/WEB-INF/si/school/addschool.jsp</result>
+			<result name="saveschool" type="redirectAction">school_getschoollist.do</result>
+			<result name="edischool">/WEB-INF/si/school/edischool.jsp</result>
+			<result name="delschool" type="redirectAction">school_getschoollist.do</result>
+		</action>
+		
+		<!-- 学校班级管理 -->
+		<action name="classes_*" class="com.fsc.xxt.si.classes.action.ClassesAction" method="{1}">
+			<result name="classeslist">/WEB-INF/si/classes/classesList.jsp</result>
+			<result name="addclasses">/WEB-INF/si/classes/addclasses.jsp</result>
+			<result name="saveclasses" type="redirectAction">classes_getclasseslist.do?id=${myid}</result>
+			<result name="ediclasses">/WEB-INF/si/classes/ediclasses.jsp</result>
+			<result name="delclasses" type="redirectAction">classes_getclasseslist.do</result>
+		</action>
+    </package>  
+</struts>

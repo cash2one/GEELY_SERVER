@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	吉利用户POJO类与吉利用户信息表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.client.po.GeelyUser" table="SY_USER">
+    	<id name="id" type="integer">
+            <column name="ID"/>
+        </id>
+        <property name="code" type="string">
+            <column name="UCODE" length="20" />
+        </property>
+        <property name="text" type="string">
+            <column name="UTEXT" length="20" />
+        </property>
+        <property name="pwd" type="string">
+            <column name="UPWD" length="32" />
+        </property>
+        <property name="dept" type="string">
+            <column name="UDEPT" length="20" />
+        </property>
+        <property name="tel" type="string">
+            <column name="UTEL" length="20" />
+        </property>
+        <property name="flag" type="string">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CRUSER" length="20" />
+        </property>
+        <property name="createTime" type="string">
+            <column name="CRTIME" length="19" />
+        </property>
+        <property name="changeUser" type="string">
+            <column name="CHUSER" length="20" />
+        </property>
+        <property name="changeTime" type="string">
+            <column name="CHTIME" length="19" />
+        </property>
+        <set name="proleSet" inverse="true" lazy="false" cascade="all">
+		  <key column="USERID"/>
+		  <one-to-many class="com.fsc.xxt.client.po.GeelyProle"/>
+		</set>
+    </class>
+</hibernate-mapping>

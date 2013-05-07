@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- （系统登录管理模块）配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 管理用户登录 -->
+	<bean id="loginAction" class="com.fsc.xxt.login.action.LoginAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+</beans>

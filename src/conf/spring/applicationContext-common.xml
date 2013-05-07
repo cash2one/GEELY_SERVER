@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 基础框架组件配置文件 -->
+<!-- Author: thh 2008.09.19 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<bean id="clientAction" class="com.fsc.framework.base.action.ClientAction" autowire="byName" scope="prototype"/>
+    <!-- *************************** DAO组件配置 *************************** -->
+    <!-- 基础DAO组件 -->
+    <bean id="baseDao" class="com.fsc.framework.base.dao.impl.BaseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- *************************** 业务逻辑组件配置 *************************** -->
+	<!-- 基础业务逻辑组件 -->
+	<bean id="baseService" class="com.fsc.framework.base.service.impl.BaseServiceImpl">
+		<property name="baseDao" ref="baseDao"/>
+	</bean>
+	
+	<!-- *************************** 业务控制器组件配置 *************************** -->
+    <!-- 基础业务控制器 -->
+	<bean id="baseAction" class="com.fsc.framework.base.action.BaseAction" scope="prototype">
+	    <property name="baseService" ref="baseService"/>
+	</bean>
+	
+	<!-- *************************** 拦截器配置 *************************** -->
+	
+	<!-- 系统有效性检查拦截器 -->
+	<bean id="systemValidityCheckInterceptor" class="com.fsc.framework.interceptor.SystemValidityCheckInterceptor">
+	    <!--property name="systemService" ref="systemService"/-->
+	</bean>
+	
+	<!-- （系统后台管理）会话状态检查拦截器 -->
+	<bean id="sessionCheckInterceptor" class="com.fsc.framework.interceptor.SessionCheckInterceptor" />
+	
+	<!-- （前台站点）会话状态检查拦截器 -->
+	<bean id="sessionCheckInterceptor2" class="com.fsc.framework.interceptor.SessionCheckInterceptor2" />
+	
+	<!-- 系统日志记录拦截器 -->
+	<bean id="sysLogTrackInterceptor" class="com.fsc.framework.interceptor.SysLogTrackInterceptor">
+	    <property name="sysLogService" ref="sysLogService"/>
+	    <property name="privilegeService" ref="privilegeService"/>
+	</bean>
+	
+	<!-- 功能权限检查拦截器 -->
+	<bean id="privilegeCheckInterceptor" class="com.fsc.framework.interceptor.PrivilegeCheckInterceptor">
+	    <property name="privilegeService" ref="privilegeService"/>
+	</bean>
+	
+	<!-- 异常处理拦截器 -->
+	<bean id="exceptionHandingInterceptor" class="com.fsc.framework.interceptor.ExceptionHandingInterceptor">
+	<property name="exceptionlogService" ref="exceptionlogService"></property>
+	</bean>
+	
+	<!--静态页面生成处理拦截器 -->
+	<bean id="staticPageInterceptor" class="com.fsc.framework.interceptor.StaticPageInterceptor"  autowire="byName">
+	</bean>
+	<!-- *************************** 异常处理器配置 *************************** -->
+	
+	<!-- 异常处理器 -->
+	<bean id="commonException" class="com.fsc.framework.exception.CommonException"/>
+</beans>

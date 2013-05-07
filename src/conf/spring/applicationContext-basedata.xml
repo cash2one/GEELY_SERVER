@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- （基础数据管理模块）配置文件 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 科目管理逻辑组件 -->
+	<bean id="provinceService"
+		class="com.fsc.xxt.basedata.province.service.impl.ProvinceServiceImpl">
+		<property name="baseDao" ref="baseDao" />
+		<property name="provinceDAO" ref="provinceDAO" />
+	</bean>
+	<bean id="provinceTreeService"
+		class="com.fsc.xxt.basedata.province.service.impl.ProvinceTreeServiceImpl"
+		autowire="byName">
+	</bean>
+	<bean id="provinceAction"
+		class="com.fsc.xxt.basedata.province.action.ProvinceAction"
+		scope="prototype">
+		<property name="provinceService" ref="provinceService" />
+	</bean>
+
+	<bean id="provinceDAO"
+		class="com.fsc.xxt.basedata.province.dao.impl.ProvinceDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 地区管理逻辑组件 -->
+	<bean id="areaService"
+		class="com.fsc.xxt.basedata.area.service.impl.AreaServiceImpl">
+		<property name="baseDao" ref="baseDao" />
+		<property name="areaDAO" ref="areaDAO" />
+	</bean>
+
+	<bean id="areaAction"
+		class="com.fsc.xxt.basedata.area.action.AreaAction"
+		scope="prototype">
+		<property name="areaService" ref="areaService" />
+	</bean>
+
+	<bean id="areaDAO"
+		class="com.fsc.xxt.basedata.area.dao.impl.AreaDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 镇区管理逻辑组件 -->
+	<bean id="townService"
+		class="com.fsc.xxt.basedata.town.service.impl.TownServiceImpl">
+		<property name="baseDao" ref="baseDao" />
+		<property name="townDAO" ref="townDAO" />
+	</bean>
+
+	<bean id="townAction"
+		class="com.fsc.xxt.basedata.town.action.TownAction"
+		scope="prototype">
+		<property name="townService" ref="townService" />
+	</bean>
+
+	<bean id="townDAO"
+		class="com.fsc.xxt.basedata.town.dao.impl.TownDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 学段学科关联管理逻辑组件 -->
+	<bean id="segCourseService"
+		class="com.fsc.xxt.basedata.sc.service.impl.SegCourseServiceImpl"
+		autowire="byName">
+	</bean>
+
+	<bean id="segCourseAction"
+		class="com.fsc.xxt.basedata.sc.action.SegCourseAction"
+		autowire="byName">
+	</bean>
+
+
+</beans>

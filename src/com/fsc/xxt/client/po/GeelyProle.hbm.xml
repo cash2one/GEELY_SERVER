@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	吉利用户权限POJO类与吉利用户权限表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.client.po.GeelyProle" table="SY_PROLE">
+    	<id name="id" type="integer">
+            <column name="ID"/>
+        </id>
+        <property name="userId" type="string">
+            <column name="USERID" length="10" />
+        </property>
+        <property name="userProle" type="string">
+            <column name="USERPROLE" length="50" />
+        </property>
+        <property name="createUser" type="string">
+            <column name="CRUSER" length="20" />
+        </property>
+        <property name="createTime" type="string">
+            <column name="CRTIME" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

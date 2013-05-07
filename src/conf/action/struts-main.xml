@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- （主界面）Struts2配置文件 -->
+
+<struts>
+    <!-- 主界面桌面 -->
+    <package name="main" extends="manageBase">
+        <action name="desktop" class="com.fsc.xxt.main.action.MainAction" method="desktop">
+        	<result name="desktop">/WEB-INF/main/desktop.jsp</result>
+        </action>
+        <action name="menu" class="com.fsc.xxt.main.action.MainAction" method="menu">
+        	<result name="menu">/WEB-INF/main/menu.jsp</result>
+        </action>
+        <action name="mainInfo" class="com.fsc.xxt.main.action.MainAction" method="info">
+        	<result name="info">/WEB-INF/main/info.jsp</result>
+        </action>
+        <action name="notbuild" class="com.fsc.xxt.main.action.MainAction" method="notbuild">
+        	<result name="notbuild">/WEB-INF/main/notBuild.jsp</result>
+        </action>        
+    </package>  
+</struts>

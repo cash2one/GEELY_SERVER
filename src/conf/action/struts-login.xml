@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- （管理用户登录）Struts2配置文件 -->
+
+<struts>
+    <!-- 登录、登出 -->
+    <package name="login" extends="default">
+    
+        <action name="login" class="com.fsc.xxt.login.action.LoginAction" method="login">
+        	<result name="success" type="redirectAction">
+        		<param name="actionName">desktop</param>
+        	</result>
+        </action>
+        <action name="logout" class="com.fsc.xxt.login.action.LoginAction" method="logout">
+        	<result name="success" type="redirect">
+        		<param name="location">/login.jsp</param>
+        	</result>
+        </action>
+        <action name="ChangePwd" class="com.fsc.xxt.login.action.LoginAction" method="changePassWord">
+        	<result name="success">/WEB-INF/sys/log/changePassword.jsp
+        	</result>
+        </action>
+        <action name="PasswordChange" class="com.fsc.xxt.login.action.LoginAction" method="passwordChange">
+        	<result name="success">/WEB-INF/sys/log/info.jsp
+        	</result>
+        </action>
+    </package>  
+     <package name="loginJson" extends="json-default">
+    	 <action name="PasswordChange" class="com.fsc.xxt.login.action.LoginAction" method="passwordChange">
+			<result type="json">
+			<param name="root">message</param>
+			</result>
+		</action>
+		 <action name="loginAjax" class="com.fsc.xxt.login.action.LoginAction">
+			<result type="json">
+			<param name="root">message</param>
+			</result>
+		</action>
+    </package>  
+</struts>

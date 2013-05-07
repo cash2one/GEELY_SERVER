@@ -1,0 +1,4 @@
+del ApplicationResources_zh_CN.properties
+del ApplicationResources.properties
+native2ascii -encoding GBK ApplicationResources_zh.properties ApplicationResources_zh_CN.properties
+native2ascii -encoding GBK ApplicationResources_zh.properties ApplicationResources.properties

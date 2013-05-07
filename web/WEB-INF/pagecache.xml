@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 静态页面缓存配置 -->
+<!-- 注意！！！！ 现阶段仅能配置不需要登录的delay节点，需要登录的delay节点不能正确获取 
+比如 delay中 head.do,userrank.do都是不用登录的请求，可以正确获取
+-->
+<config>
+	<!-- 是否开启页面缓存 -->
+	<operating status="true" />
+	<!-- 是否启动容器时更新静态页面 -->
+	<delHTML status="true" />
+	<!-- 页面存放路径 -->
+	<file savepath="./static/"/>
+	<!--高中主页 -->
+	<action name="high_index.do" reloadtime="24H"></action>
+	<!--初中主页 -->
+	<action name="junior_index.do" reloadtime="24H"></action>
+	<!--小学主页 -->
+	<action name="primary_index.do" reloadtime="24H"></action>
+	<!--资源按科目浏览 -->
+	<action name="resourceSite_courseBrowse.do" reloadtime="24H">
+		<param name="rtype"/>
+		<param name="spart"/>
+		<param name="course"/>
+		<param name="tb"/>
+	</action>
+	<!--资源名校试卷浏览 -->
+	<action name="resourceSite_paperBrowse.do" reloadtime="24H">
+		<param name="spart"/>
+		<param name="tb"/>
+	</action>
+	<!--资源名校课堂浏览 -->
+	<action name="resourceSite_videoBrowse.do" reloadtime="24H">
+		<param name="spart"/>
+		<param name="tb"/>
+	</action>
+	<!--资讯首页 -->
+	<action name="info_init.do" reloadtime="24H">
+		<param name="spart"/>
+		<param name="tb"/>
+	</action>
+	<!--资讯浏览 -->
+	<action name="info_pubInfo.do" reloadtime="24H">
+		<param name="spart"/>
+		<param name="tb"/>
+		<param name="item"/>
+		<param name="areaId"/>
+	</action>
+	<!--通告浏览 -->
+	<action name="info_noticeInfo.do" reloadtime="24H">
+		<param name="spart"/>
+		<param name="tb"/>
+		<param name="areaId"/>
+		<param name="type"/>
+	</action>
+	<!-- 试卷知识点树 -->
+	<action name="knowledgeSite_paperTree.do" reloadtime="24H">
+		<param name="spart"/>
+	</action>
+</config>

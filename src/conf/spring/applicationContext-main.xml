@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- （主界面管理模块）配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 主界面管理 -->
+	<bean id="mainAction" class="com.fsc.xxt.main.action.MainAction" scope="prototype" autowire="byName">
+	</bean>
+</beans>

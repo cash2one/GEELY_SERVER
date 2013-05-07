@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+   系统角色信息表映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.role.po.Role" table="T_SYS_ROLE">
+        <id name="roleId" type="java.lang.String">
+            <column name="ID" length="32" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="ROLE_NAME" length="64" not-null="true" />
+        </property>
+        <property name="roleDesc" type="string">
+            <column name="ROLE_DESC" length="128" />
+        </property>
+        <property name="orderNum" type="integer">
+            <column name="SORT_NO" precision="5" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

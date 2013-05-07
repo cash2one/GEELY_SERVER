@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	部门班组机构POJO类与信息表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.dept.po.Dept" table="T_SYS_DEPT">
+    	<id name="id" type="string">
+            <column name="ID" length="32"/>
+        </id>
+        <property name="orgNo" type="string">
+            <column name="ORG_NO" length="32" />
+        </property>
+        <property name="name" type="string">
+            <column name="DEPT_NAME" length="256" />
+        </property>
+        <property name="abbr" type="string">
+            <column name="ABBR" length="256" />
+        </property>
+        <property name="typeCode" type="string">
+            <column name="TYPE_CODE" length="8" />
+        </property>
+        <property name="pdeptNo" type="string">
+            <column name="P_NO" length="32" />
+        </property>
+        <property name="dispSN" type="integer">
+            <column name="SORT_NO" />
+        </property>
+        <property name="logout" type="string">
+            <column name="LOGOUT" length="8" />
+        </property>
+        <property name="orgName" type="string" formula="(select u.ORG_NAME from T_SYS_ORG u where u.ORG_NO=ORG_NO)"></property>
+    </class>
+</hibernate-mapping>

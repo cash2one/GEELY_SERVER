@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	用户POJO类与角色基本信息表相映象的映射文件
+    Author: Long XiangYong 2008.09.19
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.user.po.User" table="T_SYS_USER">
+    	<id name="id" type="string">
+            <column name="ID" length="32"/>
+        </id>
+        <property name="deptId" type="string">
+            <column name="DEPT_ID" length="32" />
+        </property>
+        <property name="staffNo" type="string">
+            <column name="STAFF_NO" length="16" />
+        </property>
+        <property name="abc" type="string">
+            <column name="ABC" length="100" />
+        </property>
+        <property name="name" type="string">
+            <column name="REAL_NAME" length="64" />
+        </property>
+        <property name="genDer" type="string">
+            <column name="SEX" length="8" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="32" />
+        </property>
+        <property name="tel" type="string">
+            <column name="TEL" length="32" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="64" />
+        </property>
+        <property name="login" type="string">
+            <column name="LOGIN" length="32" />
+        </property>
+        <property name="pwd" type="string">
+            <column name="PWD" length="32" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="8" />
+        </property>
+        <property name="onlines" type="string">
+            <column name="ONLINES" length="8" />
+        </property>
+        <property name="deptName" type="string" formula="(select d.DEPT_NAME from T_SYS_DEPT d where d.ID=DEPT_ID)"></property>
+        <property name="orgName" type="string" formula="(select u.ORG_NAME from T_SYS_ORG u where u.ORG_NO in(select d.ORG_NO from T_SYS_DEPT d where d.ID=DEPT_ID and u.ORG_NO=d.ORG_NO))"></property>
+		<set name="shortCutSet" inverse="true" lazy="false" cascade="all">
+		  <key column="USER_ID"/>
+		  <one-to-many class="com.fsc.xxt.sys.shortcut.po.ShortCut"/>
+		</set>
+    </class>
+</hibernate-mapping>

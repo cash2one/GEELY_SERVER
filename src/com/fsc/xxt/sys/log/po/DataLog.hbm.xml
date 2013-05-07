@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+<class name="com.fsc.xxt.sys.log.po.DataLog" table="T_DATA_LOG">
+	<id name="id" type="java.lang.String">
+		<column name="ID" length="32"></column>
+	</id>
+	<property name="className" type="java.lang.String">
+		<column name="CLASS_NAME" length="128"></column>
+	</property>
+	<property name="methodName" type="java.lang.String">
+		<column name="METHOD_NAME" length="128"></column>
+	</property>
+	<property name="lineNumber" type="java.lang.Integer">
+		<column name="LINE_NUMBER"></column>
+	</property>
+	<property name="message" type="java.lang.String">
+		<column name="MESSAGE" length="256"></column>
+	</property>
+	<property name="time" type="java.util.Date">
+		<column name="TIME"></column>
+	</property>
+	<property name="type" type="java.lang.Integer">
+		<column name="TYPE"></column>
+	</property>
+</class>
+</hibernate-mapping>

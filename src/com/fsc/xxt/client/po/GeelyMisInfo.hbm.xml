@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+    吉利MIS生成趋势统计POJO类与吉利MIS生成趋势统计表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.client.po.GeelyMisInfo" table="BI_MISINFO">
+        <id name="id" type="integer">
+            <column name="ID"/>
+        </id>
+        <property name="rq" type="string">
+            <column name="RQ" length="8" />
+        </property>
+        <property name="zzdm" type="string">
+            <column name="ZZDM" length="8" />
+        </property>
+        <property name="zzmc" type="string">
+            <column name="ZZMC" length="10" />
+        </property>
+        <property name="zbdm" type="string">
+            <column name="ZBDM" length="8" />
+        </property>
+        <property name="zbmc" type="string">
+            <column name="ZBMC" length="10" />
+        </property>
+        <property name="sjz" type="double">
+            <column name="SJZ" length="7" />
+        </property>
+        <property name="mbz" type="double">
+            <column name="MBZ" length="7" />
+        </property>
+        <property name="bgz" type="double">
+            <column name="BGZ" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

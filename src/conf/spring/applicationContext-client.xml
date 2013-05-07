@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 手机客户端接口配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+    <bean id="geelyUserDao" class="com.fsc.xxt.client.dao.impl.GeelyUserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+    
+    <bean id="geelyUserService" class="com.fsc.xxt.client.service.impl.GeelyUserServiceImpl">
+		<property name="baseDao" ref="baseDao"/> 
+		<property name="geelyUserDao" ref="geelyUserDao"></property>       
+    </bean>
+    
+	<bean id="clientLoginAction" class="com.fsc.xxt.client.action.LoginAction" autowire="byName" scope="prototype">
+		<property name="geelyUserService" ref="geelyUserService"></property>
+	</bean>
+	
+	<bean id="geelyMesInfoService" class="com.fsc.xxt.client.service.impl.GeelyMesInfoServiceImpl" autowire="byName"/>
+	
+	<bean id="geelyMisInfoService" class="com.fsc.xxt.client.service.impl.GeelyMisInfoServiceImpl" autowire="byName"/>
+	
+	<bean id="msgPullTask" class="com.fsc.xxt.client.service.MessagePullService" autowire="byName"></bean>
+	
+	<bean id="msgPullScheduled" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask">
+			<ref bean="msgPullTask" />
+		</property>
+		<property name="delay">
+			<value>60000</value>
+		</property>
+		<property name="period">
+			<value>30000</value>
+		</property>
+	</bean>
+	
+	<bean id="clientLoginService" class="com.fsc.xxt.client.service.impl.LoginServiceImpl" autowire="byName"/>
+	
+	<bean id="clientUserService" class="com.fsc.xxt.client.service.impl.UserServiceImpl" autowire="byName"/>
+	
+	<bean id="clientMesInfoAction" class="com.fsc.xxt.client.action.MesInfoAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="clientMisInfoAction" class="com.fsc.xxt.client.action.MisInfoAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="clientMainAction" class="com.fsc.xxt.client.action.MainAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="clientMsgAction" class="com.fsc.xxt.client.action.MsgAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="clientClassesAction" class="com.fsc.xxt.client.action.ClassesAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="clientQuestionsAction" class="com.fsc.xxt.client.action.QuestionsAction" autowire="byName" scope="prototype" />
+</beans>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 指定属性文件路径 -->
+	<!-- bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/conf/jdbc/jdbc.properties</value>
+			</list>
+		</property>
+	</bean -->
+
+	<!-- 定义数据源Bean，使用c3p0数据源实现（该实现用于参考学习及性能测试比较，不推荐用于实际，在实际中推存使用应用服务器的数据源） -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" dependency-check="none">
+		<!-- 指定连接数据库的驱动 -->
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<!-- 指定连接数据库的URL -->
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<!-- 指定连接数据库的用户名 -->
+		<property name="user" value="${jdbc.username}" />
+		<!-- 指定连接数据库的密码 -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数（Default:3） -->
+		<property name="acquireIncrement" value="3" />
+		<!-- 初始化连接数，取值应在minPoolSize与maxPoolSize之间（Default:3）  -->
+		<property name="initialPoolSize" value="3" />
+		<!-- 连接池中保留的最小连接数 -->
+		<property name="minPoolSize" value="2" />
+		<!-- 连接池中保留的最大连接数 -->
+		<property name="maxPoolSize" value="50" />
+		<!-- 数据源内加载的PreparedStatements数量（Default:0） -->
+		<property name="maxStatements" value="100" />
+		<!-- 最大空闲时间,600秒内未使用则连接被丢弃，若为0则永不丢弃（Default:0） -->
+		<property name="maxIdleTime" value="600" />
+		<!-- c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能，通过多线程实现多个操作同时被执行（Default:3） -->
+		<property name="numHelperThreads" value="10" />
+		<!-- 检查所有连接池中的空闲连接的间隔时间，单位为秒（Default:0） -->
+		<property name="idleConnectionTestPeriod" value="900" />
+	</bean>
+
+	<!-- 从连接池中抽取出本地数据库JDBC对象 几种JDBC对象抽取器，可根据不同的应用服务器进行调整
+		WebLogic：WebLogicNativeJdbcExtractor
+		WebSphere：WebSphereNativeJdbcExtractor
+		JBoss：JBossNativeJdbcExtractor
+	-->
+	<bean id="nativeJdbcExtractor" lazy-init="true"
+		class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+
+	<!-- 设置用于处理Blob数据的LobHandler
+		Spring 提供了两种LobHandler用于处理Blob数据
+		DefaultLobHandler：适用于大部分的数据库，如SqlServer，MySQL，对Oracle 10g也适用，但不适用于Oracle9i
+		　　       OracleLobHandler：适用于Oracle 9i和Oracle 10g。
+	-->
+	<bean id="lobHandler" lazy-init="true"
+		class="org.springframework.jdbc.support.lob.OracleLobHandler">
+		<property name="nativeJdbcExtractor">
+			<ref bean="nativeJdbcExtractor" />
+		</property>
+	</bean>
+	<!--bean id="lobHandler" lazy-init="true"
+		class="org.springframework.jdbc.support.lob.DefaultLobHandler">
+		<property name="nativeJdbcExtractor">
+		<ref bean="nativeJdbcExtractor"/>
+		</property>
+		</bean-->
+
+	<!-- Hibernate SessionFactory 配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 把数据源注入给SessionFactory -->
+		<!--  
+			<property name="dataSource" ref="dataSource"/>
+		-->
+		<!-- Hibernate连接配置文件 -->
+		<!--  
+			<property name="configLocation" value="WEB-INF/hibernate.cfg.xml" />
+		-->
+		<!-- 把Blob数据处理器注入Session工厂 -->
+		<property name="lobHandler" ref="lobHandler" />
+		<!-- 设置数据结构是否自动更新 -->
+		<property name="schemaUpdate" value="false" />
+		<!-- sessionFactory相关配置 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- web app server connection pool start -->
+				<prop key="hibernate.connection.datasource">
+					java:comp/env/jdbc/xxtserver
+				</prop>
+				<prop key="hibernate.connection.provider_class">
+					org.hibernate.connection.DatasourceConnectionProvider
+				</prop>
+				<!-- web app server connection pool end -->
+
+				<!-- proxool connection pool start -->
+				<!--  
+					<prop key="hibernate.connection.provider_class">
+					org.hibernate.connection.ProxoolConnectionProvider
+					</prop>	
+					<prop key="hibernate.proxool.properties">proxool.properties</prop>
+					<prop key="hibernate.proxool.pool_alias">proxool_pool</prop>
+				-->
+				<!-- proxool connection pool end -->
+
+				<!-- c3p0 connection pool start -->
+				<!--   
+					<prop key="hibernate.connection.provider_class">
+					org.hibernate.connection.C3P0ConnectionProvider
+					</prop>	
+				-->
+				<!-- c3p0 connection pool end -->
+
+				<!-- hibernate connection pool start -->
+				<!--
+					<prop key="hibernate.connection.pool_size">300</prop>
+					<prop key="hibernate.statement_cache.size">25</prop>
+				-->
+				<!-- hibernate connection pool end -->
+
+				<!-- 是否打开查询缓存 -->
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<!-- 指定缓存提供者 -->
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.NoCacheProvider
+				</prop>
+				<!-- 是否使用数据库外连接 -->
+				<prop key="hibernate.use_outer_join">true</prop>
+				<!-- 对于级联查询，一次性获取的级联深度 -->
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<!-- 设定JDBC的Statement读取数据的时候每次从数据库中取出的记录条数 -->
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<!-- 设定一次最多可以提交多少sql语句的上限,提高sql语句的执行效率 -->
+				<prop key="hibernate.jdbc.batch_size">30</prop>
+				<!-- 为Hibernate关联的批量抓取设置默认数量，建议的取值为4,8,16  -->
+				<prop key="hibernate.default_batch_fetch_size">16</prop>
+				<!-- 把Hibernate查询中的短语替换为SQL短语 -->
+				<prop key="hibernate.query.substitutions">
+					true 1, false 0, yes 'Y', no 'N'
+				</prop>
+				<!-- 设置查询翻译器 -->
+				<prop key="hibernate.query.factory_class">
+					org.hibernate.hql.ast.ASTQueryTranslatorFactory
+				</prop>
+				<!-- 是否把执行的SQL语句输出到控制台 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 是否格式化控制台中输出的SQL语句 -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- 是否从JDBC中读取二进制类型时使用流 -->
+				<prop key="hibernate.jdbc.use_streams_for_binary">
+					true
+				</prop>
+				<!-- 指定数据库适配器（方言） -->
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.OracleDialect
+				</prop>
+				<!--prop key="hibernate.dialect">${hibernate.dialect}</prop-->
+				<!--prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop-->
+
+			</props>
+		</property>
+		<!-- 配置映射文件 -->
+		<property name="mappingResources">
+			<list>
+			    <!-- geely begin -->
+			    <value>com/fsc/xxt/client/po/GeelyUser.hbm.xml</value>
+			    <value>com/fsc/xxt/client/po/GeelyProle.hbm.xml</value>
+			    <value>com/fsc/xxt/client/po/GeelyMisInfo.hbm.xml</value>
+			    <value>com/fsc/xxt/client/po/GeelyMesInfo.hbm.xml</value>
+			    <value>com/fsc/xxt/client/po/GeelyMesInfoDetail.hbm.xml</value>
+			    <!-- geely end -->
+				<!-- sys begin -->
+				<!-- <value>com/fsc/xxt/sys/org/po/Org.hbm.xml</value>
+				<value>com/fsc/xxt/sys/dept/po/Dept.hbm.xml</value>
+				<value>com/fsc/xxt/sys/role/po/Role.hbm.xml</value>
+				<value>com/fsc/xxt/sys/module/po/Module.hbm.xml</value>
+				<value>com/fsc/xxt/sys/user/po/User.hbm.xml</value>
+				<value>com/fsc/xxt/sys/user/po/UserRole.hbm.xml</value>
+				<value>com/fsc/xxt/sys/role/po/RolePriv.hbm.xml</value>
+				<value>com/fsc/xxt/sys/privilege/po/Privilege.hbm.xml</value>
+				<value>com/fsc/xxt/sys/dic/po/Dictionary.hbm.xml</value>
+				<value>com/fsc/xxt/sys/log/po/SysLog.hbm.xml</value>
+				<value>com/fsc/xxt/sys/log/po/ExceptionLog.hbm.xml</value>
+				<value>com/fsc/xxt/sys/shortcut/po/ShortCut.hbm.xml</value> -->
+				<!-- sys end -->
+
+				<!-- mobile begin -->
+				<!-- <value>com/fsc/mobile/po/SmsMt.hbm.xml</value>
+				<value>com/fsc/mobile/po/SmsMtBak.hbm.xml</value> -->
+				<!-- mobile end -->
+				<!-- <value>com/fsc/email/po/EmailMtBak.hbm.xml</value>
+				<value>com/fsc/email/po/EmailMt.hbm.xml</value> -->
+				<!--  basedata  -->
+				<!-- <value>com/fsc/xxt/basedata/area/po/Area.hbm.xml</value>
+				<value>com/fsc/xxt/basedata/town/po/Town.hbm.xml</value>
+				<value>com/fsc/xxt/basedata/province/po/Province.hbm.xml</value>
+				<value>com/fsc/xxt/basedata/sc/po/SegCourse.hbm.xml</value> -->
+				<!-- basedata end -->
+				<!-- <value>com/fsc/xxt/si/school/po/School.hbm.xml</value>
+				<value>com/fsc/xxt/si/classes/po/Classes.hbm.xml</value>
+				<value>com/fsc/xxt/si/student/po/Student.hbm.xml</value>
+                <value>com/fsc/xxt/si/teacher/po/Teacher.hbm.xml</value>
+                <value>com/fsc/xxt/si/teacher/po/TeacherClass.hbm.xml</value>
+                <value>com/fsc/xxt/si/teacher/po/TeacherCourse.hbm.xml</value>
+                <value>com/fsc/xxt/si/msg/po/Msg.hbm.xml</value>
+                <value>com/fsc/xxt/si/msg/po/NickName.hbm.xml</value>
+                <value>com/fsc/xxt/si/msg/po/ClassMsg.hbm.xml</value>
+				<value>com/fsc/xxt/si/msg/po/MsgCollection.hbm.xml</value>
+				<value>com/fsc/xxt/si/msg/po/MsgInfo.hbm.xml</value>
+				<value>com/fsc/xxt/si/product/po/Product.hbm.xml</value>
+				<value>com/fsc/xxt/si/product/po/ProductCollection.hbm.xml</value>
+				<value>com/fsc/xxt/si/bulletin/po/Bulletin.hbm.xml</value>
+				<value>com/fsc/xxt/si/questions/po/Questions.hbm.xml</value> -->
+				<!-- android begin -->
+				<!-- <value>com/fsc/xxt/version/po/Version.hbm.xml</value> -->
+				<!-- android end -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- 事务管理器配置，使用Hibernate局部事务管理器策略（本地事务管理） -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 事务拦截器配置 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!-- 把事务管理器注入事务代理器 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<!-- 定义事务策略（即事务传播属性） -->
+		<property name="transactionAttributes">
+			<props>
+				<!-- PROPAGATION_REQUIRED：支持当前事务，如果当前没有事务，就新建一个事务； -->
+				<!-- readOnly：设置操作权限为只读,一般用于查询的方法,优化作用； -->
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="select*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 定义BeanNameAutoProxyCreator -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 指定对满足哪些bean name的bean自动生成业务代理 -->
+		<property name="beanNames">
+			<!-- 下面是所有需要自动创建事务代理的Bean -->
+			<list>
+				<value>*Service</value>
+			</list>
+		</property>
+		<!-- 定义BeanNameAutoProxyCreator所需的事务拦截器 -->
+		<property name="interceptorNames">
+			<list>
+				<!-- 用于生成事务代理的拦截器 -->
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 定时任务配置 begin-->
+	<bean id="timer" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<!-- ref local="smsScheduled" / -->
+				<!-- ref local="emailScheduled" / >
+				<ref bean="smsScheduled"/>-->
+				<!-- <ref bean="msgPullScheduled"/> -->
+			</list>
+		</property>
+	</bean>
+	<!-- 定时任务配置 end -->
+</beans>

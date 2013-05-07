@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 短彩信（短彩信管理模块）配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!--  bean id="sessionFactory87"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="schemaUpdate" value="false" />
+		<property name="lobHandler" ref="lobHandler"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.connection.datasource">
+					java:comp/env/jdbc/aqn_oracle87
+				</prop>
+				<prop key="hibernate.connection.provider_class">
+					org.hibernate.connection.DatasourceConnectionProvider
+				</prop>
+
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.NoCacheProvider
+				</prop>
+				<prop key="hibernate.use_outer_join">false</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<prop key="hibernate.jdbc.batch_size">30</prop>
+				<prop key="hibernate.default_batch_fetch_size">16</prop>
+				<prop key="hibernate.query.substitutions">
+					true 1, false 0, yes 'Y', no 'N'
+				</prop>
+				<prop key="hibernate.query.factory_class">
+					org.hibernate.hql.ast.ASTQueryTranslatorFactory
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">
+					false
+				</prop>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.OracleDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+			</list>
+		</property>
+	</bean-->
+	<!--  bean id="mobileSmsDAO"
+		class="com.fsc.mobile.dao.impl.MobileSmsDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory87"></property>
+	</bean-->
+	
+	<!--  bean id="smsDeliverDAO" class="com.fsc.mobile.dao.impl.SmsDeliverDAOImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory87"></property>
+	</bean-->
+	
+	<!-- 短信定时任务发送服务组件 -->
+	<bean id="smsTask" class="com.fsc.mobile.service.SmsTaskService" autowire="byName">
+	</bean>
+	
+	<bean id="smsScheduled" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask">
+			<ref bean="smsTask" />
+		</property>
+		<property name="delay">
+			<value>30000</value>
+		</property>
+		<property name="period">
+			<value>30000</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="smsMtDAO" class="com.fsc.mobile.dao.impl.SmsMtDAOImpl" autowire="byName">
+	</bean>
+	
+	<bean id="smsMtService" class="com.fsc.mobile.service.impl.SmsMtServiceImpl" autowire="byName">
+	</bean>
+	
+</beans>

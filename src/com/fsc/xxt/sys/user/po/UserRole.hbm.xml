@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	用户角色分配POJO类与用户角色基本信息表相映象的映射文件
+    Author: Long XiangYong 2008.09.19
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.user.po.UserRole" table="T_SYS_USERROLE">
+    	<id name="id" type="string">
+            <column name="ID" length="32"/>
+        </id>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="32" />
+        </property>
+        <property name="roleId" type="string">
+            <column name="ROLE_ID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- （基础数据管理模块）Struts2配置文件 -->
+
+<struts>
+    <!-- 基础数据管理 -->
+    <package name="manageBaseData" extends="manageBase">
+     <!-- 省份管理 -->
+        <action name="province" class="com.fsc.xxt.basedata.province.action.ProvinceAction">
+            <result name="list">/WEB-INF/basedata/province/list.jsp</result>
+            <result name="input">/WEB-INF/basedata/province/form.jsp</result>
+            <result name="success" type="redirect-action">
+                <param name="actionName">province!list</param>
+                <param name="redirectSign">1</param>
+            </result>
+        </action>
+ 	
+ 	
+ 	 <!-- 地区管理 -->
+        <action name="area" class="com.fsc.xxt.basedata.area.action.AreaAction">
+            <result name="list">/WEB-INF/basedata/area/list.jsp</result>
+            <result name="input">/WEB-INF/basedata/area/form.jsp</result>
+            <result name="tree">/WEB-INF/basedata/area/tree.jsp</result>
+            <result name="frame">/WEB-INF/basedata/area/frame.jsp</result>
+            <result name="success" type="redirect-action">
+                <param name="actionName">area!list</param>
+                <param name="provinceid">${provinceid}</param>
+                <param name="redirectSign">1</param>
+            </result>
+        </action>
+        
+        <!-- 镇区管理 -->
+        <action name="town" class="com.fsc.xxt.basedata.town.action.TownAction">
+            <result name="list">/WEB-INF/basedata/town/list.jsp</result>
+            <result name="input">/WEB-INF/basedata/town/form.jsp</result>
+            <result name="tree">/WEB-INF/basedata/town/tree.jsp</result>
+            <result name="frame">/WEB-INF/basedata/town/frame.jsp</result>
+            <result name="success" type="redirect-action">
+                <param name="actionName">town!list</param>
+                <param name="areaid">${areaid}</param>
+                <param name="redirectSign">1</param>
+            </result>
+        </action>
+        
+        <!-- 学段学科关联管理 -->
+        <action name="segcourse" class="com.fsc.xxt.basedata.sc.action.SegCourseAction">
+            <result name="tree">/WEB-INF/basedata/sc/tree.jsp</result>
+            <result name="frame">/WEB-INF/basedata/sc/frame.jsp</result>
+            <result name="list">/WEB-INF/basedata/sc/list.jsp</result>
+            <result name="success" type="redirect-action">
+                <param name="actionName">segcourse!list</param>
+                <param name="spart">${spart}</param>
+                <param name="redirectSign">1</param>
+            </result>
+        </action>
+   		
+   </package>
+   
+    
+    <!-- json验证 -->
+    <package name="baseDataJson" extends="json-default">
+    	<action name="provinceAjax" class="com.fsc.xxt.basedata.province.action.ProvinceAction">
+	    	<result type="json">
+	    		<param name="root">message</param>
+	    	</result>
+	    	<result type="json" name="list">
+	    		<param name="root">list</param>
+	    	</result>
+	    </action>
+	    <action name="areaAjax" class="com.fsc.xxt.basedata.area.action.AreaAction">
+	    	<result type="json" name="list">
+	    		<param name="root">list</param>
+	    	</result>
+	    </action>
+	    <action name="townAjax" class="com.fsc.xxt.basedata.town.action.TownAction">
+	    	<result type="json" name="list">
+	    		<param name="root">list</param>
+	    	</result>
+	    </action>
+	    <action name="getCourse" class="com.fsc.xxt.basedata.sc.action.SegCourseAction" method="getCourse">
+	    	<result type="json">
+	    		<param name="root">courseNoList</param>
+	    	</result>
+	    </action>
+	    
+	    <action name="getCourseBySegnos" class="com.fsc.xxt.basedata.sc.action.SegCourseAction" method="getCourseBySegnos">
+	    	<result type="json">
+	    		<param name="root">courseNoList</param>
+	    	</result>
+	    </action>
+    </package>  
+</struts>

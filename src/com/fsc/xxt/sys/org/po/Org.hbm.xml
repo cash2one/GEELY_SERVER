@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+   单位机构信息表映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.org.po.Org" table="T_SYS_ORG">
+        <id name="orgNo" type="java.lang.String">
+            <column name="ORG_NO" length="32" />
+        </id>
+        <property name="orgName" type="string">
+            <column name="ORG_NAME" length="256" not-null="true" />
+        </property>
+        <property name="abc" type="string">
+            <column name="ABC" length="256" />
+        </property>
+        <property name="porgNo" type="string">
+            <column name="P_NO" length="32" />
+        </property>
+        <property name="orgType" type="string">
+            <column name="ORG_TYPE" length="8" />
+        </property>
+        <property name="sortNo" type="integer">
+            <column name="SORT_NO" precision="5" scale="0" />
+        </property>
+        <property name="logOut" type="string">
+            <column name="LOGOUT" length="8" />
+        </property>
+    </class>
+</hibernate-mapping>

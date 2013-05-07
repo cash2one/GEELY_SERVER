@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	吉利MES生成趋势统计POJO类与吉利MES生成趋势统计表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.client.po.GeelyMesInfo" table="MES_VEHSTATE">
+    	<id name="id" type="integer">
+            <column name="ID"/>
+        </id>
+        <property name="rq" type="string">
+            <column name="RQ" length="8" />
+        </property>
+        <property name="xh" type="string">
+            <column name="XH" length="2" />
+        </property>
+        <property name="caption" type="string">
+            <column name="CAPTION" length="20" />
+        </property>
+        <property name="qtys" type="double">
+            <column name="QTYS" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

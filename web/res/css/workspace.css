@@ -1,0 +1,439 @@
+/************************************ 工作空间 操作界面样式表 ********************************/
+/****************************** Author: Long XiangYong 2008-10-09 ********************************/
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	scrollbar-base-color: #d3e7fc; /* 基准颜色自动调整 */
+	scrollbar-face-color: #ffffff; /* 滚动条表面色 */
+	scrollbar-shadow-color: #d3e7fc; /* 下/右斜面暗边框颜色 */ 
+	scrollbar-highlight-color: #badbf7; /* 上/左斜面亮边框颜色 */
+	scrollbar-3dlight-color: #ffffff; /* 上/左边沿亮边颜色 */
+	scrollbar-darkshadow-color: #ffffff; /* 下/右边沿颜色 */
+	scrollbar-track-color: #eef6fe;  /* 底板轨迹颜色（滚动条的背景颜色） */
+	scrollbar-arrow-color: #a1d3fc; /* 两端箭头颜色 */
+}
+
+/* 链接样式 */
+a {
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+
+/* 链接被鼠标的光标覆盖时的样式 */
+a:hover {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+/* label标签通用样式 */
+label {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/* 链接被激活时的样式 */
+a:active {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: none;
+}
+
+
+/* TD样式 */
+td {	
+	font-size: 12px;
+}
+
+
+/* 信息编辑界面静态文本样式 */
+.staticText {
+}
+
+/* 文本编辑框样式 */
+.inputEdit {
+	font-size: 12px;
+}
+
+/* 文本编辑域样式 */
+.textareaEdit {  
+	font-size: 12px;
+    border-style: none; 
+    overflow: auto;
+}
+
+/* 下拉选择框样式 */
+.selectEdit {
+	font-size: 12px;
+}
+
+/* 复选框样式 */
+.checkBoxEdit {
+}
+
+/* 文本编辑框样式 */
+.inputView {
+	font-size: 12px;
+	color: #aca899;
+}
+
+/* 文本编辑域样式 */
+.textareaView {  
+	font-size: 12px;
+	color: #aca899;
+    border-style: none; 
+    overflow: auto;
+}
+
+/* 下拉选择框样式 */
+.selectView {
+	font-size: 12px;
+	color: #aca899;
+}
+
+/* 复选框样式 */
+.checkBoxView {
+}
+
+/* 红色字体样式 */
+.fontRed {
+	color: #ff0000;
+	font-size: 12px;
+	font-family: 宋体;
+}
+
+/* 警告字体样式 */
+.fontWarn {
+	color: #ff0000;
+	font-size: 12px;
+	font-family: 宋体;
+}
+
+/* 提示字体样式 */
+.fontPrompt {
+	color: #ff0000;
+	font-size: 12px;
+	font-family: 宋体;
+}
+
+/* 注解字体样式 */
+.fontComment {
+	color: #055bae;
+	font-size: 12px;
+	font-family: 宋体;
+}
+
+
+/* 宽度可变的按钮样式（默认宽度为50px） */
+.button {
+	border-top: #8fb9d0 1px solid; 
+	border-bottom: #8fb9d0 1px solid;
+    border-left: #8fb9d0 1px solid; 
+    border-right: #8fb9d0 1px solid; 
+    padding-top: 2px; 
+    padding-left: 2px; 
+    padding-right: 2px; 
+    font-size: 12px;
+    color: black;
+    cursor: hand;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#9dbcea); 
+    height: 19;
+    width: 50px;      
+}
+
+/************************ 信息列表界面 ********************/
+
+/* 信息列表界面border=none的TABLE样式 */
+.tableListBorderNone {
+	border-style: none;
+    border-collapse: collapse; 
+    padd: expression(this.cellPadding=0); 
+}
+
+/* 信息列表界面数据区域TABLE样式 */
+.tableList {
+    border-style: none;
+	border-collapse: collapse;
+	background-color: #d3e7fc;
+}
+
+/* 信息列表界面数据区域标题栏TR样式 */
+.trListColumnHeader {	
+	height: 26px;	
+}
+
+/* 信息列表界面数据区域内容栏TR样式 */
+.trListColumnDetail {	
+	height: 25px;	
+}
+
+/* 信息列表界面顶部左边TD样式 */
+.tdListTopLeft {
+	background: url(../images/workspace/topLeft.gif);
+	width: 15;
+	height: 30;
+}
+
+/* 信息列表界面顶部中间TD样式 */
+.tdListTopCenter {
+	background: url(../images/workspace/topCenter.gif);
+}
+
+/* 信息列表界面顶部右边TD样式 */
+.tdListTopRight {
+	background: url(../images/workspace/topRight.gif);
+	width: 14;
+}
+
+/* 信息列表界面中部左边TD样式 */
+.tdListMiddleLeft {
+	background: url(../images/workspace/middleLeft.gif);
+	width: 9;
+}
+
+/* 信息列表界面中部中间TD样式 */
+.tdListMiddleCenter {
+	background: #d3e7fc;
+}
+
+/* 信息列表界面中部右边TD样式 */
+.tdListMiddleRight {
+	background: url(../images/workspace/middleRight.gif);
+	width: 9;
+}
+
+/* 信息列表界面底部左边TD样式 */
+.tdListBottomLeft {
+	background: url(../images/workspace/bottomLeft.gif);
+	width: 15;
+	height: 29;
+}
+
+/* 信息列表界面底部中间TD样式 */
+.tdListBottomCenter {
+	background: url(../images/workspace/bottomCenter.gif);
+}
+
+/* 信息列表界面底部右边TD样式 */
+.tdListBottomRight {
+	background: url(../images/workspace/bottomRight.gif);
+	width: 14;
+}
+
+/* 信息列表界面数据区域标题栏样式 */
+.tdListColumnHeader {
+	border: solid #a1cce6 1px;
+	font-size: 12px;
+	text-align: center;
+	background: url(../images/workspace/middleCenter.gif);
+}
+
+/* 信息列表界面数据区域内容栏样式 */
+.tdListColumnDetail {
+	border: solid #a1cce6 1px;
+	font-size: 12px;
+	text-align: center;
+	background: #ffffff;
+}
+
+/* 信息列表界面顶部文本样式 */
+.textListTop {
+	font-size: 12px;
+	color: #1F4A65;
+	font-weight: bold;
+}
+
+/* 信息列表界面底部文本样式 */
+.textListBottom {
+	font-size: 12px;
+}
+
+/* 信息列表界面宽度不可变的按钮样式 */
+.buttonList {
+    background-image: url(../images/workspace/btnBg01.gif);
+    background-color:transparent;
+    border: 0;
+    width: 45px;
+    height: 19px;
+    cursor: hand;
+    text-align: center;
+    padding-top: 2px; 
+}
+
+/************************ 信息编辑界面 ********************/
+
+/* 信息编辑界面border=none的TABLE样式 */
+.tableEditBorderNone {
+	border-style: none;
+    border-collapse: collapse; 
+    padd: expression(this.cellPadding=0); 
+}
+
+/* 信息编辑界面内容输入区域的外层TABLE样式 */
+.tableEditOuter {
+	border-style: none;
+	border-collapse: collapse;
+	background-color: #e1f0fb;
+}
+
+/* 信息编辑界面内容输入区域的TABLE样式 */
+.tableEdit {
+	border-style: none;
+	border-collapse: collapse;
+	background-color: #f7fbfe;
+}
+
+/* 信息编辑界面内容输入区域的TR样式 */
+.trEdit {	
+	height: 20px;	
+}
+
+/* 信息编辑界面内容输入区域的TD样式 */
+.tdEidt {	
+	border: solid #a1cce6 1px;
+	text-align: center;
+	font-size: 12px;
+}
+
+/* 信息编辑界面内容输入区域的TD样式 */
+.tdLabel {	
+	border: solid #a1cce6 1px;
+	text-align: center;
+	font-size: 12px;
+}
+
+/* 信息编辑界面内容输入区域的静态文本TD样式 */
+.tdEidtStaticText {	
+	border: solid #a1cce6 1px;
+	text-align: center;
+	font-size: 12px;
+}
+
+/* 信息编辑界面内容输入区域的动态文本TD样式 */
+.tdEidtDynamicText {	
+	border: solid #a1cce6 1px;
+	text-align: left;
+	font-size: 12px;
+}
+
+/* 信息编辑界面顶部左边TD样式 */
+.tdEditTopLeft {
+	background: url(../images/workspace/topLeft.gif);
+	width: 15;
+	height: 30;
+}
+
+/* 信息编辑界面顶部中间TD样式 */
+.tdEditTopCenter {
+	background: url(../images/workspace/topCenter.gif);
+}
+
+/* 信息编辑界面顶部右边TD样式 */
+.tdEditTopRight {
+	background: url(../images/workspace/topRight.gif);
+	width: 14;
+}
+
+/* 信息编辑界面中部左边TD样式 */
+.tdEditMiddleLeft {
+	background: url(../images/workspace/middleLeft.gif);
+	width: 9;
+}
+
+/* 信息编辑界面中部中间TD样式 */
+.tdEditMiddleCenter {
+	background: #d3e7fc;
+}
+
+/* 信息编辑界面中部右边TD样式 */
+.tdEditMiddleRight {
+	background: url(../images/workspace/middleRight.gif);
+	width: 9;
+}
+
+/* 信息编辑界面底部左边TD样式 */
+.tdEditBottomLeft {
+	background: url(../images/workspace/bottomLeft.gif);
+	width: 15;
+	height: 29;
+}
+
+/* 信息编辑界面底部中间TD样式 */
+.tdEditBottomCenter {
+	background: url(../images/workspace/bottomCenter.gif);
+}
+
+/* 信息编辑界面底部右边TD样式 */
+.tdEditBottomRight {
+	background: url(../images/workspace/bottomRight.gif);
+	width: 14;
+}
+
+/* 信息编辑界面顶部文字样式 */
+.fontEditTop {
+	font-size: 12px;
+	color: #1F4A65;
+	font-weight: bold;
+}
+
+/* 信息编辑界面宽度不可变的按钮样式 */
+.buttonEdit {
+    background-image: url(../images/workspace/btnBg60.gif);
+    background-color: transparent;
+    border: 0;
+    width: 60px;
+    height: 19px;
+    cursor: hand;
+    text-align: center;
+    padding-top: 2px; 
+}
+
+
+/* 采用了框架结构的工作区间的样式 */
+
+/* 功能模块标题栏左边TD样式 */
+.tdTitleLeft {
+	background: url(../images/workspace/titleLeft.gif);
+	width: 15;
+	height: 30;
+}
+
+/* 功能模块标题栏中间TD样式 */
+.tdTitleCenter {
+	background: url(../images/workspace/titleCenter.gif);
+}
+
+/* 功能模块标题栏右边TD样式 */
+.tdTitleRight {
+	background: url(../images/workspace/titleRight.gif);
+	width: 14;
+}
+
+/* 信息编辑界面中部左边TD样式 */
+.tdEditMiddleLeft {
+	background: url(../images/workspace/middleLeft.gif);
+	width: 9;
+}
+
+.leftList{width:168px; height:96%; border:solid 1px #7cb9dd; margin-left:6px; background:#fff;}
+
+.leftListTitle{
+	width: 168px; 
+	height: 24px; 
+	background: url(../images/index/leftMenuTitleBg.gif); 
+	font-size: 12px; 
+	font-weight: bold; 
+}
+
+.leftListItem{
+	width: 168px; 
+	height: 18px; 
+	cursor: hand;
+	color: #055bae; 
+	text-decoration: none; 
+	font-size: 12px; 
+}

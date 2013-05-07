@@ -1,0 +1,26 @@
+package com.fsc.xxt.si.exam.service.impl;
+
+import com.fsc.framework.base.service.impl.BaseServiceImpl;
+
+import com.fsc.xxt.si.exam.dao.ExamDao;
+import com.fsc.xxt.si.exam.service.ExamService;
+
+
+/**
+ *
+ * <p>Title:校讯通手机服务端</p>
+ * <p>Description:成绩管理服务层接口实现</p>
+ * <p>创建日期:Feb 2, 2012</p>
+ * @author ZhouChao
+ * @version 1.0
+ * <p>湖南家校圈科技有限公司</p>
+ * <p>http://www.139910.com</p>
+ * <p>http://wps.139910.com</p>
+ */
+public class ExamServiceImpl extends BaseServiceImpl implements ExamService {
+    private ExamDao examDao;
+
+    public void setExamDao(ExamDao examDao) {
+        this.examDao = examDao;
+    }
+}

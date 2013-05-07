@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="client" extends="clientBase">
+        <action name="clientLogin_*" class="clientLoginAction" method="{1}">
+        </action>
+        
+        <action name="clientMesinfo_*" class="clientMesInfoAction" method="{1}">
+        </action>
+        
+         <action name="clientMisinfo_*" class="clientMisInfoAction" method="{1}">
+        </action>
+        
+        <action name="clientMain_*" class="clientMainAction" method="{1}">
+        </action>
+        
+        <action name="clientMsg_*" class="clientMsgAction" method="{1}">
+        </action>
+        
+        <action name="clientClasses_*" class="clientClassesAction" method="{1}">
+        </action>
+        
+        <action name="clientExam_*" class="com.fsc.xxt.client.action.ExamAction" method="{1}">
+        </action>
+        
+        <action name="clientUser_*" class="com.fsc.xxt.client.action.UserAction" method="{1}">
+        </action>
+        
+        <action name="clientBulletin_*" class="com.fsc.xxt.client.action.BulletinAction" method="{1}">
+        </action>
+        
+        <action name="clientPro_*" class="com.fsc.xxt.client.action.ProductAction" method="{1}">
+        </action>
+        
+        <action name="clientQues_*" class="com.fsc.xxt.client.action.QuestionsAction" method="{1}">
+        </action>
+        
+         <action name="clientVersion_*" class="com.fsc.xxt.client.action.VersionAction" method="{1}">
+        	 <result name="download" type="stream">   
+                <param name="inputName">inputStream</param>             
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>   
+                <param name="bufferSize">4096</param> 
+            </result>
+        </action>
+   </package>   
+</struts>

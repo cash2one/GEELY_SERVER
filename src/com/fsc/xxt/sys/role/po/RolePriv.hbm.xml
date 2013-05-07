@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+   系统角色权限分配信息表映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.role.po.RolePriv" table="T_SYS_ROLEPRIV">
+        <id name="rolePrivId" type="java.lang.String">
+            <column name="ID" length="32" />
+        </id>
+        <property name="roleId" type="string">
+            <column name="ROLEID" length="32" not-null="true" />
+        </property>
+        <property name="privId" type="string">
+            <column name="PRIVID" length="32" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

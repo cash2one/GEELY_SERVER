@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	系统功能权限信息POJO类与系统功能权限信息表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.privilege.po.Privilege" table="T_SYS_PRIVILEGE">
+    	<id name="privId" type="string">
+            <column name="ID" />
+        </id>
+        <property name="className" type="string">
+            <column name="CLASS_NAME" length="160" />
+        </property>
+        <property name="classDesc" type="string">
+            <column name="CLASS_DESC" length="64" />
+        </property>
+        <property name="methodName" type="string">
+            <column name="METHOD_NAME" length="64" />
+        </property>
+        <property name="methodDesc" type="string">
+            <column name="METHOD_DESC" length="64" />
+        </property>
+        <property name="moduleId" type="integer">
+            <column name="MID" />
+        </property>
+        <property name="orderNum" type="integer">
+            <column name="SORT_NO" />
+        </property>
+        <property name="sign" type="integer">
+            <column name="SIGN" />
+        </property>
+    </class>
+</hibernate-mapping>

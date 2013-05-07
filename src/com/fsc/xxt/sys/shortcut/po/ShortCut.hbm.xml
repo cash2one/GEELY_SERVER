@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	系统快捷菜单POJO类与信息表相映象的映射文件
+-->
+<hibernate-mapping>
+    <class name="com.fsc.xxt.sys.shortcut.po.ShortCut" table="T_SYS_SHORTCUT">
+    	<id name="id" type="string">
+            <column name="ID" length="32"/>
+        </id>
+        <property name="moduleId" type="integer">
+            <column name="MODULE_ID" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="32" />
+        </property>
+        <many-to-one name="module" column="MODULE_ID" update="false" not-found="ignore"
+			insert="false" class="com.fsc.xxt.sys.module.po.Module" />
+    </class>
+</hibernate-mapping>

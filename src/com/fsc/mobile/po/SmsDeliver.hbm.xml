@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fsc.mobile.po.SmsDeliver" table="nnis_comm_deliver" schema="dbo">
+        <id name="mo_id" type="java.lang.Integer">
+            <column name="MO_ID" />
+        </id>
+        <property name="sourceUser" type="java.lang.String">
+            <column name="sourceUser" length="11" />
+        </property>
+        <property name="msg" type="java.lang.String">
+            <column name="msg" length="160" />
+        </property>
+        <property name="dest_id" type="java.lang.String">
+            <column name="dest_id" length="20" />
+        </property>
+        <property name="genTime" type="date">
+            <column name="genTime" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- email配置文件 -->
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<bean id="emailDao" class="com.fsc.email.dao.impl.EmailDaoImpl" autowire="byName">
+	</bean>
+	
+	<bean id="emailService" class="com.fsc.email.service.impl.EmailServiceImpl" autowire="byName">
+	</bean>
+	
+	<!-- bean id="emailTask" class="com.fsc.email.service.EmailTaskService" autowire="byName"></bean -->
+	
+	<!-- bean id="emailScheduled" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask">
+			<ref bean="emailTask" />
+		</property>
+		<property name="delay">
+			<value>10000</value>
+		</property>
+		<property name="period">
+			<value>30000</value>
+		</property>
+	</bean -->
+</beans>
